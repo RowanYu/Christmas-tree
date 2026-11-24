@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b13">
+  <title>璀璨圣诞树 · 手势互动</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="scene">
+    <canvas id="tree" aria-label="粒子圣诞树"></canvas>
+    <div class="vignette"></div>
+    <header class="masthead">
+      <div class="christmas-pill" id="countdown">✦ <span>距离圣诞</span> <b>—</b></div>
+      <div class="eyebrow"><span></span> A LITTLE CHRISTMAS MAGIC</div>
+      <h1>Merry Christmas</h1>
+      <p class="signature">愿每一束微光，都为你而亮。</p>
+      <button class="album-button" id="albumButton" type="button"><span class="album-spark">✦</span> 回忆相册 <span class="album-count" id="albumCount">0</span></button>
+    </header>
+
+    <section class="controls" aria-label="手势控制">
+      <div class="control-copy">
+        <span class="camera-dot" id="cameraDot"></span>
+        <div><strong id="statusTitle">等待一场小小魔法</strong><small id="statusText">开启摄像头，用手势与圣诞树互动</small></div>
+      </div>
+      <button id="cameraButton" class="camera-button" type="button"><span class="camera-icon">◉</span><span id="buttonText">开启摄像头</span></button>
+    </section>
+
+    <aside class="gesture-legend" aria-label="手势说明">
+      <span><b>✋</b> 张开 · 散开</span><span><b>✊</b> 握拳 · 聚拢</span>
+      <span><b>🤏</b> 捏合 · 照片</span><span><b>↔</b> 张开挥手 · 旋转</span>
+    </aside>
+
+    <div class="camera-preview" id="cameraPreview" hidden>
+      <video id="camera" playsinline muted></video>
+      <canvas id="handDebug"></canvas>
+      <span class="preview-label">手势识别中</span>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <dialog id="albumDialog" class="album-dialog" aria-labelledby="albumTitle">
+      <div class="album-heading">
+        <div><span class="album-kicker">YOUR LITTLE MEMORIES</span><h2 id="albumTitle">回忆相册 <small id="albumPhotoCount">0 张照片</small></h2></div>
+        <button class="album-close" id="closeAlbum" type="button" aria-label="关闭相册">×</button>
+      </div>
+      <p class="album-note">添加属于你的照片，它们会留在这台设备的浏览器里。</p>
+      <div id="albumEmpty" class="album-empty">相册还空着<br><span>按 + 添加几张圣诞回忆</span></div>
+      <div id="albumGrid" class="album-grid"></div>
+      <div class="album-footer"><button id="addPhotosButton" type="button" class="add-photos"><b>＋</b> 添加照片</button><input id="photoFiles" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple hidden><span id="albumMessage" role="status"></span></div>
+    </dialog>
+    <dialog id="photoDialog" class="photo-dialog">
+      <button class="close-photo" id="closePhoto" type="button" aria-label="关闭">×</button>
+      <div class="photo-frame"><img id="photoImage" src="" alt="圣诞回忆"></div>
+      <p class="photo-caption" id="photoCaption"></p>
+      <small>再捏一次，翻开另一张回忆</small>
+    </dialog>
+    <footer>MADE OF LIGHT &amp; A LITTLE WONDER</footer>
+  </main>
+  <script src="./upstream/mediapipe/drawing_utils/drawing_utils.js"></script>
+  <script src="./upstream/mediapipe/hands/hands.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
